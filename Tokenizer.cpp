@@ -36,4 +36,9 @@ int Tokenizer::getToken() {
   return AChar;
 }
 
+void Tokenizer::moveToNextToken()
+{
+  CurrToken = getToken();
+}
+
 /// EOF

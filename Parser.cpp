@@ -5,7 +5,7 @@
 #include "Tokenizer.h"
 
 Parser::Parser() {
-  /// Tokenizer::InitTokenizer();
+  Tokenizer::moveToNextToken();
   InitParser();
 }
 
@@ -16,10 +16,10 @@ void Parser::InitParser(void) {
 }
 
 UniqueExprPtr Parser::ParseNumberExpr() {
-  auto NumExpr = std::make_unique<NumberExpr>(
-      NumberExpr(strtod(Tokenizer::CurrIdStr.c_str(), nullptr)));
+  double Value = strtod(Tokenizer::CurrIdStr.c_str(), nullptr);
+  auto NumExpr = std::make_unique<NumberExpr>(Value);
   Tokenizer::moveToNextToken();
-  return NumExpr;
+  return std::move(NumExpr);
 }
 
 UniqueExprPtr Parser::ParsePrimary() {
